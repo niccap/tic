@@ -9,5 +9,6 @@ package biz.capuano.tictactoe;
  * @author niccap
  */
 public class NewClass {
+    private int x;
     
 }
