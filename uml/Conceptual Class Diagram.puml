@@ -1,0 +1,43 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class Player {
+  # mark: char
+  + {abstract} makeMove(board: Board): Move
+}
+
+class HumanPlayer {
+  + makeMove(board: Board): Move
+}
+
+class ComputerPlayer {
+  + makeMove(board: Board): Move
+}
+
+class Board {
+  - cells: char[3][3]
+  + print()
+  + isValidMove(move: Move): boolean
+  + makeMove(move: Move, mark: char): boolean
+  + isFull(): boolean
+  + checkForWin(mark: char): boolean
+}
+
+class Game {
+  - currentPlayer: Player
+  + play()
+}
+
+class Move {
+  - row: int
+  - col: int
+}
+
+Game o-- "2" Player: player1, player2
+Game *-- "1" Board: board
+Board ..> Move
+Player ..> Move
+Player ..> Board
+Player <|-- ComputerPlayer
+Player <|-- HumanPlayer
+@enduml

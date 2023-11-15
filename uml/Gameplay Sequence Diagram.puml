@@ -1,0 +1,46 @@
+@startuml
+hide footbox
+
+participant game as ":Game"
+participant player as "currentPlayer: Player"
+participant board as "board:Board"
+
+[-> game: play
+activate game
+
+loop !someoneWon && !boardIsFull
+  game -> player++ : makeMove(board)
+
+  loop !validMove
+    player -> player : [ask/generate move]
+    player -> board++ : isValidMove(move)
+    board -> board : [check if the move is valid]
+    board --> player: validMove: boolean
+    deactivate board
+  end
+
+  player -> board++ : makeMove(move)
+  board -> board : [update board]
+  board --> player
+  deactivate board
+  player --> game
+  deactivate player
+
+  game -> board++ : print()
+  deactivate board
+
+  game -> board++ : checkForWin(currentPlayer)
+  board -> board : [check for win conditions]
+  board --> game : someoneWon: boolean
+  deactivate board
+
+  game -> board++ : isFull()
+  board -> board : [check if the board is full]
+  board --> game : boardIsFull: boolean
+  deactivate board
+
+  game -> game : [switch currentPlayer]
+end
+deactivate game
+
+@enduml

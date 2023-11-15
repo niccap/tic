@@ -1,0 +1,19 @@
+@startuml
+
+actor Player
+
+usecase "Start New Game" as Start
+usecase "Play Again" as Again
+usecase "Play Game" as Play
+usecase "Make a Move" as Move
+usecase "Generate a Move" as Generate
+
+Play --> Move: <<includes>>
+Again --> Start: <<includes>>
+Move <-- Generate: <<extends>>
+
+Player -- Start
+Player -- Again
+Player -- Play
+Player -- Move
+@enduml

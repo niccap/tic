@@ -1,0 +1,64 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class Player {
+  # mark: char
+  # Player(mark: char)
+  + getMark(): char
+  + {abstract} makeMove(board: Board): Move
+}
+
+class HumanPlayer {
+  - {static} scanner: Scanner
+  + HumanPlayer(mark: char)
+  + makeMove(board: Board): Move
+}
+
+class ComputerPlayer {
+  - {static} random: Random
+  + ComputerPlayer(mark: char)
+  + makeMove(board: Board): Move
+}
+
+class Board {
+  - {static} SIZE: int = 3
+  - cells: char[SIZE][SIZE]
+  + Board()
+  + print()
+  + isValidMove(move: Move): boolean
+  + makeMove(move: Move, mark: char): boolean
+  + isFull(): boolean
+  + checkForWin(mark: char): boolean
+}
+
+class Game {
+  - currentPlayer: Player
+  + Game(player1: Player, player2: Player)
+  + play()
+}
+
+class Move {
+  - row: int
+  - col: int
+  + Move(row: int, col: int)
+  + getRow(): int
+  + getCol(): int
+}
+
+class TicTacToe {
+  + {static} main()
+  - {static} generatePlayer(mark: char): Player
+  - {static} startNewGame()
+  - {static} playAgain(): boolean
+}
+
+TicTacToe ..> Player
+TicTacToe ..> Game
+Game o-- "2" Player: player1, player2
+Game *-- "1" Board: board
+Board ..> Move
+Player ..> Move
+Player ..> Board
+Player <|-- ComputerPlayer
+Player <|-- HumanPlayer
+@enduml
