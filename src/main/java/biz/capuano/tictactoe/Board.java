@@ -3,7 +3,7 @@ package biz.capuano.tictactoe;
 class Board {
     public static final int SIZE = 3;
     private final char[][] cells;
-    public String x, y;
+    public String x, y, b, xx;
 
     public Board() {
         cells = new char[SIZE][SIZE];
