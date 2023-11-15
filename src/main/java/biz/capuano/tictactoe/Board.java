@@ -1,8 +1,9 @@
 package biz.capuano.tictactoe;
 
 class Board {
-    public static final int SIZE = 3, x = 70;
+    public static final int SIZE = 3;
     private final char[][] cells;
+    public String x, y;
 
     public Board() {
         cells = new char[SIZE][SIZE];
@@ -11,10 +12,6 @@ class Board {
                 cells[i][j] = ' ';
     }
 
-    public int boh () {
-        return 10;
-    }
-    
     public void print() {
         for (int i = 0; i < 3; i++) {
             System.out.print("│ ");
